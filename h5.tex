@@ -1,0 +1,87 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsthm}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+
+\usepackage{amssymb}
+\newenvironment{claim}[1]{\par\noindent\underline{Claim:}\space#1}{}
+\newenvironment{guess}[1]{\par\noindent\underline{Guess:}\space#1}{}
+\usepackage{amsthm}
+
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm}
+
+\title{Homework5}
+\author{Qinyun Song}
+\date{}
+
+\begin{document}
+	\maketitle
+
+	\section{Markov's inequality}
+		For a random variable $X$ and $X = -9$ with probability $0.5$ while $X = 11$ with probability $0.5$. Then we can see that \begin{equation}
+		E[X] = 0.5 \times -9 + 0.5 \times 11 = 1
+		\end{equation}
+		And the probability \begin{equation}
+			Pr \left[ X >  10 \right] = 0.5 = \frac{1}{2}
+			\end{equation}
+
+	\section{Comparing concentration inequalities}
+		\begin{enumerate}
+			\item The expectation of $X$ is \begin{equation}
+				E\left[X\right] = 1 \times \frac{1}{3} + 0 \times \frac{2}{3} = \frac{1}{3}
+				\end{equation}
+				Then from the \emph{Markov's inequality}, we can see that \begin{equation}
+				Pr \left[ X > \frac{t}{3}\right] \leq \frac{1}{t}
+				\end{equation}
+			\item We can calculate the variance of $X$ as \begin{equation}
+					var(X) = N \times \frac{1}{3} \times \frac{2}{3} = \frac{2N}{9}
+				\end{equation}
+			\item Define variable $y_i = x_i - \frac{1}{3}$. Then we can see that $E\left[y_i\right] = 0$. We can see that \begin{equation}
+			y_i = \frac{2}{3} wp \frac{1}{3} and y_i = -\frac{1}{3} wp \frac{2}{3}
+			\end{equation}
+			Thus we know that \begin{equation}
+				var(Y) = E\left[Y^2\right] = \frac{4}{9} \times \frac{1}{3} + \frac{1}{9} \times \frac{2}{3} = \frac{6}{27} = \frac{2}{9}
+			\end{equation}
+			So for the std-dev, we have \begin{equation}
+				std-dev(Y) = \sqrt{var(Y)} = \frac{\sqrt{2}}{3}
+			\end{equation}
+			If we want $X > \frac{2N}{3}$, then we need $Y > \frac{2N + 1}{3}$. Then by using the \emph{Chebychev's inequality}, we know that \begin{equation}
+				Pr\left[ X > \frac{2N}{3}\right] = Pr\left[|Y| > \frac{2N + 1}{3}\right] = Pr\left[|Y| > \frac{\sqrt{2}}{3} \times \frac{2N + 1}{\sqrt{2}}\right] \leq \frac{2}{(2N + 1)^2}
+			\end{equation}
+			\item .
+		\end{enumerate}
+
+	\section{Hashing}
+		\begin{enumerate}
+			\item .
+			\item .
+			\item .
+			\item .
+		\end{enumerate}
+
+	\section{Election prediction}
+		\begin{enumerate}
+			\item .
+			\item .
+		\end{enumerate}
+
+	\section{Estimating mean and median}
+		\begin{enumerate}
+			\item .
+			\item .
+		\end{enumerate}
+
+	\section{Randomized Min-Cut}
+		\begin{enumerate}
+			\item .
+			\item .
+			\item .
+			\item .
+		\end{enumerate}
+\end{document}
