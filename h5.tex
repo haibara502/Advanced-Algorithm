@@ -34,81 +34,132 @@
 	\section{Comparing concentration inequalities}
 		\begin{enumerate}
 			\item The expectation of $X$ is \begin{equation}
-				E\left[X\right] = 1 \times \frac{1}{3} + 0 \times \frac{2}{3} = \frac{1}{3}
+				E\left[X\right] = 1 \times \frac{1}{3} + 0 \times \frac{2}{3} = \frac{N}{3}
 				\end{equation}
 				Then from the \emph{Markov's inequality}, we can see that \begin{equation}
-				Pr \left[ X > \frac{t}{3}\right] \leq \frac{1}{t}
+					Pr\left[ X > 2N / 3 \right] < \frac{E \left[ X \right] }{2N / 3}
+				\end{equation}
+				From above we already know the value of $E\left[X\right]$. So we know that \begin{equation}
+					Pr\left[X > 2N / 3\right] < \frac{N / 3}{2N / 3} = \frac{1}{2}
 				\end{equation}
 			\item We can calculate the variance of $X$ as \begin{equation}
-					var(X) = N \times \frac{1}{3} \times \frac{2}{3} = \frac{2N}{9}
+					var(X) = N \times p \times (1 - p) = N \times \frac{1}{3} \times \frac{2}{3} = \frac{2N}{9}
 				\end{equation}
-			\item Define variable $y_i = x_i - \frac{1}{3}$. Then we can see that $E\left[y_i\right] = 0$. We can see that \begin{equation}
-			y_i = \frac{2}{3} wp \frac{1}{3} and y_i = -\frac{1}{3} wp \frac{2}{3}
+			\item 
+				If we want $X > 2N / 3$, when we need \begin{equation}
+					|X - E\left[X\right]| = |X - N / 3| > |2N / 3 - N / 3| = N / 3
+				\end{equation}
+				The \emph{Chebychev's inequality} states that \begin{equation}
+					Pr\left[|X - E[X]| > t\right] \leq \frac{var(X)}{t^2}
+				\end{equation}
+				Then by using \emph{Chebychev's inequality}, we now that \begin{equation}
+					Pr\left[|X - E[X]| > N / 3 \right] < var(X) / (N / 3)^2 = \frac{var(X) \times 9} { N^2}
+				\end{equation}
+				From above, we know that $var(X) = \frac{2N}{9}$, so we can get \begin{equation}
+					Pr\left[|X - E[X]| > N / 3 \right] < \frac{9 \times 2N}{ N^2 \times 9} = \frac{2}{N}
+				\end{equation}
+			%Define variable $y_i = x_i - \frac{1}{3}$. Then we can see that $E\left[y_i\right] = 0$. We can see that \begin{equation}
+			%y_i = \frac{2}{3} wp \frac{1}{3} and y_i = -\frac{1}{3} wp \frac{2}{3}
+			%\end{equation}
+			%Thus we know that \begin{equation}
+			%	var(Y) = E\left[Y^2\right] = \frac{4}{9} \times \frac{1}{3} + \frac{1}{9} \times \frac{2}{3} = \frac{6}{27} = \frac{2}{9}
+			%\end{equation}
+			%So for the std-dev, we have \begin{equation}
+			%	std-dev(Y) = \sqrt{var(Y)} = \frac{\sqrt{2}}{3}
+			%\end{equation}
+			%If we want $X > \frac{2N}{3}$, then we need $Y > \frac{2N + 1}{3}$. Then by using the \emph{Chebychev's inequality}, we know that \begin{equation}
+			%	Pr\left[ X > \frac{2N}{3}\right] = Pr\left[|Y| > \frac{2N + 1}{3}\right] = Pr\left[|Y| > \frac{\sqrt{2}}{3} \times \frac{2N + 1}{\sqrt{2}}\right] \leq \frac{2}{(2N + 1)^2}
+			%\end{equation}
+			\item The \emph{Chernoff inequality} is \begin{equation}
+				Pr\left[X \geq cE[X]\right] \leq e^{-(c \ln{c} - c + 1)E[X]}
+			\end{equation} when $c \geq 1$.
+			Then we know that \begin{equation}
+				Pr\left[ X > 2N / 3\right] = Pr\left[X > 2E[X]\right] < e^{-(2\ln{2} - 2 + 1)\frac{N}{3}} = e^{-0.129N}
 			\end{equation}
-			Thus we know that \begin{equation}
-				var(Y) = E\left[Y^2\right] = \frac{4}{9} \times \frac{1}{3} + \frac{1}{9} \times \frac{2}{3} = \frac{6}{27} = \frac{2}{9}
-			\end{equation}
-			So for the std-dev, we have \begin{equation}
-				std-dev(Y) = \sqrt{var(Y)} = \frac{\sqrt{2}}{3}
-			\end{equation}
-			If we want $X > \frac{2N}{3}$, then we need $Y > \frac{2N + 1}{3}$. Then by using the \emph{Chebychev's inequality}, we know that \begin{equation}
-				Pr\left[ X > \frac{2N}{3}\right] = Pr\left[|Y| > \frac{2N + 1}{3}\right] = Pr\left[|Y| > \frac{\sqrt{2}}{3} \times \frac{2N + 1}{\sqrt{2}}\right] \leq \frac{2}{(2N + 1)^2}
-			\end{equation}
-			\item .
+
 		\end{enumerate}
 
 	\section{Hashing}
 		\begin{enumerate}
-			\item .
-			\item .
-			\item .
-			\item .
+			\item For any bin, if it is empty, it means that all objects are matched to the remaining $N -1 $ bins. So the probability that this bin is empty is \begin{equation}
+				Pr\left[ \text{One bin is empty}\right] = (1 - 1/N)^M = (\frac{N - 1}{N})^M
+			\end{equation}
+			\item Define variable $X$ meaning that whether the $i-th$ bin is empty or not. Then from above, we know that \begin{equation}
+				E\left[X \right] = N \times (\frac{N - 1}{N})^M
+			\end{equation}
+			By applying the equation \begin{equation}
+				1 - x \leq e^{-x}
+			\end{equation}
+			We know that \begin{equation}
+				E\left[X\right] = N \times (1 - 1/N)^M \leq N \times e^{-M/N}
+			\end{equation}
+			Since $M = 4N \log{N}$, we finally get that \begin{equation}
+				E\left[X\right] \leq N \times e^{-\frac{4N \log{N}}{N}} = N \times (e^{\log{N}})^{-4} = N^{-3}
+			\end{equation}
+			Then if we want to know the probability that exist at least one empty bin, we need to calculate \begin{equation}
+				Pr\left[X \geq 1\right] \leq E\left[X\right] / 1 = N^{-3} < N^{-1}
+			\end{equation}
+			So we know that the probability that exist an empty bin is less than $\frac{1}{N}$.
+			\item From the above, we know that $(1 - 1/N)^M \leq e^{-M/N}$, in this case, we know that $M =  N$. So we know that \begin{equation}
+				E\left[X\right] = n\times(1 - 1/N)^M \leq n\times e^{-M/N} = N/e
+			\end{equation}
+			Then by using the \emph{Markov's inequality}, we know that \begin{equation}
+				Pr\left[X \geq 0.8N\right] \leq E\left[X\right] / 0.8N = frac{N}{e} / 0.8N = \frac{1}{0.8e} \approx 0.46 < \frac{1}{2}
+			\end{equation}
+			So we show that the probability that $80\%$ of the bins are empty is less than $\frac{1}{2}$.
+			\item The variables $X_i$ are not independent. Suppose we are thinking about one specific bin $b_i$, if it is empty, it shows that all the objects are hashed to other bins. Thus will effect the empty status of other bins. So they are related to each other.
 		\end{enumerate}
 
 	\section{Election prediction}
 		\begin{enumerate}
-			\item Define variable $x_i$ as the $i-th$ person vote $1$ or $0$. It satisfies the following function \begin{equation}
-				x_i = 1 if vote for 1 = -1 if vote for 0
-				\end{equation}Then we know that \begin{equation}
-				E\left[X\right] = 1 \times p  -1 \times (1 - p) = 2p - 1
-			\end{equation}
-				Define another variable $x_i' = x_i - (2p - 1)$. Then we know that $E[X'] = 0$. We can also know that \begin{equation}
-					E\left[X'\right] = 4 \times (p(1-p)^2 + (1 - p)p^2) = 4p(1 - p)
+			\item Define a variable $x_i$ meaning that whether the $i-th$ person vote $1$ or $0$. Then we know that \begin{equation}
+				E\left[x_i\right] = p \times 1 + ( 1-  p) \times 0 = p
 				\end{equation}
-				So by using the \emph{Chernoff inequality}, we know that \begin{equation}
-					Pr\left[\sum_ix_i' >t \right] \leq 2e^{\frac{-t^2/2}{4np(1 - p) + t}}
+				Define variable $y_i = x_i - p$. Then we know that \begin{equation}
+					E\left[y_i\right] = 0
 				\end{equation}
-				Since \begin{equation}
-					\sum_i x_i' = \sum_i x_i - n(2p - 1)
+				And we can see that \begin{equation}
+					y_i = \left\{ \begin{aligned} 
+						1 - p & \qquad w.p. \quad p \\
+						-p & \qquad w.p. \quad 1-p \\
+						\end{aligned}\right.\end{equation}
+				Then we can see that \begin{equation}
+					E\left[y_i^2\right] = (1 - p)^2 \times p + (-p)^2 \times (1 - p) = p(1 - p)
 				\end{equation}
-				we know that \begin{equation}
-					Pr\left[\sum_i x_i' > t\right] = Pr\left[\sum_i x_i > t + n(2p - 1)\right]
+				So $E\left[Y^2\right] = Np(1 - p) $.
+				Then apply the \emph{Chernoff bound}, we know that \begin{equation}
+					Pr\left[\sum_i^N x_i > t + np\right] = Pr\left[\sum_i^N y_i > t\right] \leq exp(\frac{-t^2/2}{np(1 - p) + 1/3t})
 				\end{equation}
-				Since we want to know if $\sum_i x_i = 0$ or not, we then need \begin{equation}
-					t = -n(2p - 1)
+				Since we want to predict the majority, we need to see the probability of $X > \frac{1}{2}$. So we need \begin{equation}
+					t + np = \frac{N}{2}
+				\end{equation}
+				And we can know that \begin{equation}
+					t = n(\frac{1}{2} - p)
 				\end{equation}
 				So we know that \begin{equation}
-					Pr\left[\sum_ix_i > 0\right] \leq 2e^{\frac{-(-n(2p - 1))^2 / 2}{4np(1 - p) - n(2p - 1)}}
-					= 2e^{\frac{-n(2p - 1)^2}{4p - 4p^2 + 1}}
-				\end{equation}
+					Pr\left[X > \frac{N}{2}\right] = Pr\left[Y > \frac{N}{2} - np\right] \leq exp(\frac{-(n(\frac{1}{2} - p))^2 / 2}{np(1 - p) + \frac{1}{3}n(\frac{1}{2} - p)})
+					\end{equation}
 				Since $p = 0.75$, we know that \begin{equation}
-					Pr\left[\sum_ix_i > 0\right]\leq 2e^{\frac{-0.25n}{1.75}} = 2e^{-\frac{n}{7}}
+					Pr\left[X > \frac{N}{2}\right] \leq e^{\frac{-(n\times0.25)^2 / 2}{0.75N \times 0.25 + \frac{1}{3} \times N \times (-0.25)}} = e^{-0.3N}
 				\end{equation}
-				If we ned at least $99\%$ confidence, we will require the right part of the equation be no less than $99\%$. So we want that \begin{equation}
-					2e^{-\frac{n}{7}} \geq 99\%
-				\end{equation} Finally we can see that, to ensure the confidene no less than $99\%$, we need \begin{equation}
-					n \geq 5
+				Since we want to have confidence $99\%$, we need to set \begin{equation}
+					e^{-0.3N} = 0.01
 				\end{equation}
-				So the bound of $n$ is no less than $5$.
-			\item If the probability now is $p = 0.501$, then we know that \begin{equation}
-				Pr\left[ \sum_i x_i > 0 \right] \leq 2e^{\frac{-0.000004n}{1.999996}} = 2e^{-\frac{n}{499999}}
-			\end{equation}
-			Then we need \begin{equation}
-				2e^{-\frac{n}{499999}} \geq 99\%
-			\end{equation}
-			So we need that \begin{equation}
-				n \geq 351599
-			\end{equation}
+				So we know that \begin{equation}
+					N \approx 16
+				\end{equation}
+			\item From the above answer, we know that \begin{equation}
+					Pr\left[X > \frac{N}{2}\right] = Pr\left[Y > \frac{N}{2} - np\right] \leq exp(\frac{-(n(\frac{1}{2} - p))^2 / 2}{np(1 - p) + \frac{1}{3}n(\frac{1}{2} - p)})
+				\end{equation}
+				By applying $p = 0.501$, we know that \begin{equation}
+					Pr\left[X > \frac{N}{2}\right] \leq exp(\frac{3N}{2(10^3-3\times 501\times 499)})
+				\end{equation}
+				So if we want to have confidence at least $99\%$, we need that \begin{equation}
+					exp(\frac{3N}{2(10^3-3\times 501\times 499)}) = 0.01
+				\end{equation}
+				So we know that \begin{equation}
+					N \approx 2296925
+				\end{equation}
 		\end{enumerate}
 
 	\section{Estimating mean and median}
@@ -121,26 +172,63 @@
 					&= \frac{1}{3}  \sum_{i = 1}^3 A\left[i\right]\\
 					&= u
 			\end{align}
-			%If $k = 1$, the variance is calculated as \begin{align}
-			%	var & = E\left[(u' - u)^2\right] \\
-			%			& = \frac{1}{n}\sum_{i = 1}^n{ (A\left[i\right] - u)^2} \\
-			%				& = \frac{1}{n}\sum_{i = 1}^n {A\left[i\right]^2 - u^2} \\
-			%					& \leq \frac{1}{n} - u^2 
-			%\end{align}
-			Then if $k = 2$, the variance can now be calculated as \begin{align}
-				var &= E\left[(u' - u)^2 \right] \\
-					   &= \frac{1}{3}(u'_{1, 2} - u)^2 + \frac{1}{3}(u'_{2, 3} - u)^2 + \frac{1}{3}(u'_{1, 3} - u)^2 \\
-					   &= \frac{1}{6}(\sum_{i = 1}^3 A\left[i\right]^2 - A\left[1\right]A\left[2\right] - A\left[2\right]A\left[3\right] - A\left[1\right]A\left[3\right])
+			Compare with the method without replacement, we can see that the expectation of mean using replacement is more close to the actual mean. The expectation with replacement can be the same as the original mean.
+			The variance can now be calculated as 
+				\begin{align}
+				var &= E\left[ (u - E\left[u\right])^2\right] \\&= \sum_{i = 1}^3 (Pr\left[i\right] \times (i - E\left[u_i\right])) \\&= \frac{1}{18}(u_1^2 + u_2^2 + u_3^2 - u_1u_2 - u_1u_3 - u_2u_3)
 				\end{align}
-			Compare with the replacement case, in this case, we disregard the case that we choose one indice twice. 
-			\item .
+			Compare with the replacement case, the variance without replacement is $(\frac{1}{9})(2u_1^2 + 2u_2^2 + 2u_3^2 + u_1u_2 + u_1u_3 + u_2u_3)$.
+			\item  \begin{proof}
+				Let us just consider the most simple case. That is $n = 3$. Suppose the sequence is $\left[0, 0.4, 1\right]$. We can see that the median of it is $0.4$. When $k = o(n)$, possible value of $k$ can vary from one to three. Consider different cases one by one. \begin{description}
+				\item[$k = 1$] In this case, possible empirical median value can be $\{0, 0.4, 1\}$ with probability $\frac{1}{3}$. And both $0, 1$ are off by an amount $\geq 0.1$.So with probability $\frac{2}{3}$, the empirical median is off by an amount $\geq 0.1$ which we can regard as high probability.
+				\item[$k = 2$ without replacement] In this case, three possible empirical median are $0.2, 0.5, 0.7$ with same probability $\frac{1}{3}$. So we can see that the empirical median is \emph{always} off by an amount $\geq 0.1$.
+				\item[$k = 2$ with replacement] In this case, we can check all possible empirical median \begin{tabular}{|c|c|c|c|}
+					\hline
+					& 0 & 0.4 & 1 \\
+					\hline
+					0 & 0 & 0.2 & 0.5 \\
+					\hline
+					0.4 & 0.2 & 0.4 & 0.7 \\
+					\hline
+					1 & 0.5 & 0.7 & 1 \\
+					\hline
+				\end{tabular}
+				From the table we can see that, with probability $\frac{8}{9}$ the empirical median is at least off by an amount $\geq 0.1$. This probability can be regarded as high probability.
+				\item[$k = 3$] In this case, we didn't try to use less examples to estimate the original median. So this case is disgarded.
+				\end{description}
+				So after all, we can show that, there are examples in which the estimate is off by an amount $\geq 0.1$.
+			\end{proof}
 		\end{enumerate}
 
 	\section{Randomized Min-Cut}
 		\begin{enumerate}
-			\item .
-			\item .
-			\item .
-			\item .
+			\item \begin{proof}
+				Since $E'$ is needed to be cut, it will devide the graph into two parts. And the vertices in one part cannot reach the vertices in another part. Since the each we remove is not in $E'$, they must belong to exactly one part. So when we remove the edge, we will not hurt $E'$ at all. So the character of $E'$ remains the same. So the size of the min cut in the new graph is equal to that in $G$.
+			\end{proof}
+			\item \begin{proof}First of all, the total degree of all vertices is $2|E|$. When we pick one vertex at random, the average of its degree is \begin{equation}
+				\sum_i p_i \times degree_i = \frac{1}{n}\sum_i degree_i = \frac{1}{n} 2|E| = \frac{2|E|}{n}
+			\end{equation}
+			So there must exist one vertex $u$ with $degree_u \leq \frac{2|E|}{n}$. Because otherwise, the total degree of all vertices should be bigger than $2|E|$ which is contradict with the problem. So we can simply choose the vertex $u$ as one side and all other vertices as another side. Then the min cut of this situation cannot be bigger than $\frac{2|E|}{n}$. So if $E'$ is one of the min cut, we have $|E'| \leq \frac{2|E|}{n}$. \end{proof}
+			\item \begin{proof}
+				Suppose the edge we choose is $e$. Let $E'$ denotes one of the min cut of graph $G = (V, E)$. Since we need that the min cut value is maintained, from problem 1, we know that we wish $e \not\in E'$. The probability that $e \in E'$ can be calculated as \begin{equation}
+					Pr\left[e \in E'\right] = |E'| / |E| \leq 2|E| / n|E| = \frac{2}{n}
+				\end{equation}
+				So the probability that the min cut can remain is no less than $(1 - \frac{2}{n})$. \end{proof}
+			\item \begin{proof}For any min cut, lets say $E'_i$, the probability that we end up with it \begin{equation}
+				Pr\left[\text{min cut is} E'_i\right] = Pr\left[e_1 \not\in E'_i\right] \times \cdots \times Pr\left[e_{n - 2} \not\in E'_i\right] 
+			\end{equation}
+			From the result from above problem, we can see that \begin{equation}
+				Pr\left[\text{min cut is} E'_i\right] \geq (1 - \frac{2}{n})\times \cdots \times (1 - \frac{2}{3}) = \frac{2}{n(n - 1)} \geq \frac{2}{n^2}
+			\end{equation}
+			So we know that, for one min cut $E'_i$, we have probability no less than $\frac{2}{n^2}$ such that we end up with this min cut. Suppose there are $k$ possible min cut, the total probability that we end up with one possible min cut is \begin{equation}
+				Pr\left[\text{End up with one min cut}\right] \geq \sum_{i = 1}^k \frac{2}{n^2}
+			\end{equation}
+			And it is obviously that the sum of these probabilities cannot be lager than one. So we know that \begin{equation}
+				k \times \frac{2}{n^2} \leq 1
+			\end{equation}
+			And we can conclude that \begin{equation}
+				k \leq \frac{n^2}{2}
+			\end{equation}
+			So the possible number of min cuts is no bigger than $\frac{n^2}{2}$. \end{proof}
 		\end{enumerate}
 \end{document}
